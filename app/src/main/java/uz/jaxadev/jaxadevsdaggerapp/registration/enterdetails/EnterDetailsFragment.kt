@@ -1,5 +1,6 @@
 package uz.jaxadev.jaxadevsdaggerapp.registration.enterdetails
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,18 +11,28 @@ import android.widget.TextView
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import uz.jaxadev.jaxadevsdaggerapp.MyApplication
 import uz.jaxadev.jaxadevsdaggerapp.R
 import uz.jaxadev.jaxadevsdaggerapp.registration.RegistrationActivity
 import uz.jaxadev.jaxadevsdaggerapp.registration.RegistrationViewModel
+import javax.inject.Inject
 
 class EnterDetailsFragment : Fragment() {
-
-    private lateinit var registrationViewModel: RegistrationViewModel
-    private lateinit var enterDetailsViewModel: EnterDetailsViewModel
 
     private lateinit var errorTextView: TextView
     private lateinit var usernameEditText: EditText
     private lateinit var passwordEditText: EditText
+
+    @Inject
+    lateinit var registrationViewModel: RegistrationViewModel
+
+    @Inject
+    lateinit var enterDetailsViewModel: EnterDetailsViewModel
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        (activity as RegistrationActivity).registrationComponent.inject(this)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,9 +41,10 @@ class EnterDetailsFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_enter_details, container, false)
 
-        registrationViewModel = (activity as RegistrationActivity).registrationViewModel
 
-        enterDetailsViewModel = EnterDetailsViewModel()
+        (requireActivity().application as MyApplication).appComponent.inject(this)
+
+
         enterDetailsViewModel.enterDetailsState.observe(this,
             Observer<EnterDetailsViewState> { state ->
                 when (state) {

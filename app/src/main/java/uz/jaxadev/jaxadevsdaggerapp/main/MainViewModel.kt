@@ -1,8 +1,11 @@
 package uz.jaxadev.jaxadevsdaggerapp.main
 
+import uz.jaxadev.jaxadevsdaggerapp.di.ActivityScope
 import uz.jaxadev.jaxadevsdaggerapp.user.UserDataRepository
+import javax.inject.Inject
 
-class MainViewModel(private val userDataRepository: UserDataRepository) {
+@ActivityScope
+class MainViewModel @Inject constructor(private val userDataRepository: UserDataRepository) {
 
     val welcomeText: String
         get() = "Hello ${userDataRepository.username}!"

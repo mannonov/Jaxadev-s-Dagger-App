@@ -53,4 +53,7 @@ dependencies {
 
     implementation 'com.google.code.findbugs:jsr305:3.0.2'
 
+
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.1'
+
 }

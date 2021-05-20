@@ -1,9 +1,11 @@
 package uz.jaxadev.jaxadevsdaggerapp.registration
 
+import uz.jaxadev.jaxadevsdaggerapp.di.ActivityScope
 import uz.jaxadev.jaxadevsdaggerapp.user.UserManager
+import javax.inject.Inject
 
-
-class RegistrationViewModel(val userManager: UserManager) {
+@ActivityScope
+class RegistrationViewModel @Inject constructor(val userManager: UserManager) {
 
     private var username: String? = null
     private var password: String? = null

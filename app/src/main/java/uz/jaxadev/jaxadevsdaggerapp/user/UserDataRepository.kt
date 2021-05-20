@@ -1,8 +1,9 @@
 package uz.jaxadev.jaxadevsdaggerapp.user
 
+import javax.inject.Inject
 import kotlin.random.Random
 
-class UserDataRepository(private val userManager: UserManager) {
+class UserDataRepository @Inject constructor(private val userManager: UserManager) {
 
     val username: String
         get() = userManager.username
